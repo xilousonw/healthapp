@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 class FirstaidSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Firstaid
-        fields = ['c_name']
+        fields = ['id','c_name']
         # extra_kwargs = {
         #     'id':{'read_only':True}
         # }
