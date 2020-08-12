@@ -8,9 +8,14 @@ from healthapp.utils.models import BaseModel
 class Aid(BaseModel):
     name = models.CharField(max_length=32,verbose_name='疾病类别')
 
+    # symptom = models.ForeignKey(to='Symptom',on_delete=models.CASCADE,verbose_name='症状')
+
 
 class Symptom(BaseModel):
     name = models.CharField(max_length=32,verbose_name='症状')
+
+    # aid = models.ForeignKey(to='Aid',on_delete=models.CASCADE,verbose_name='疾病类型')
+
 
 
 class Drug(BaseModel):
@@ -78,7 +83,7 @@ class Drugdetail(BaseModel):
     old_note = models.CharField(max_length=128,verbose_name='老年人须知')
     drug_interactions = models.CharField(max_length=128,verbose_name='底部声明')
     pharmacological = models.TextField(verbose_name='药理实验')
-    pharmacokinetics = models.CharField(max_length=128,verbose_name='')
+    pharmacokinetics = models.CharField(max_length=128,verbose_name='药物代谢动力学')
     store = models.CharField(max_length=32,verbose_name='存储方式')
     period = models.CharField(max_length=32,verbose_name='保质期')
     execution_standard = models.CharField(max_length=32,verbose_name='执行标准')

@@ -16,7 +16,6 @@ class news(BaseModel):
         (7, '中医'),
         (8, '心理'),
     )
-
     title = models.CharField(max_length=128, verbose_name="资讯标题")
     news_img = models.ImageField(upload_to="news", max_length=255, verbose_name="封面图片", default='icon/default.png',blank=True, null=True)
     checked = models.IntegerField(verbose_name='阅读量')
@@ -58,9 +57,17 @@ class news_detail(BaseModel):
 class comment(BaseModel):
     username = models.CharField(max_length=32,verbose_name='评论用户')
     usericon = models.ImageField(upload_to='icon', default='icon/default.png',verbose_name='用户头像')
+
     content = models.CharField(verbose_name='评论内容', max_length=255)
     cmt_time = models.DateTimeField(auto_now_add=True, verbose_name='评论时间')
-    cmt_rated = models.IntegerField(verbose_name='评分')
+    cmt_thumbup = models.IntegerField(verbose_name='评论点赞数')
     # 自关联
     parent = models.ForeignKey(to='self', null=True,on_delete=models.CASCADE)  # 有些评论就是根评
 
+# {
+#     "username":"laoba",
+#     "usericon":"http://127.0.0.1:8000/media/icon/default.png",
+#     "content":"11111123232",
+#     "cmt_time":1231,
+#     "cmt_thumbup":109
+# }

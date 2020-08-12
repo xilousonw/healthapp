@@ -61,6 +61,9 @@ INSTALLED_APPS = [
     'zixun',
     'goods',
     'aid',
+    'comments',
+    'accompany',
+
 
 
 
@@ -75,14 +78,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+	'django.middleware.common.CommonMiddleware',
 ]
 
 
-from corsheaders.middleware import CorsMiddleware
+# from corsheaders.middleware import CorsMiddleware
 ROOT_URLCONF = 'healthapp.urls'
 
 
-ROOT_URLCONF = 'healthapp.urls'
 
 TEMPLATES = [
     {
@@ -168,7 +171,10 @@ AUTH_USER_MODEL='user.user'
 
 REST_FRAMEWORK={
     'EXCEPTION_HANDLER': 'healthapp.utils.exceptions.common_exception_handler',
-    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_THROTTLE_RATES':{
+        'sms':'1/m'  # key要跟类中的scop对应
+        }
 }
 
 
@@ -227,15 +233,24 @@ LOGGING = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = (
-	'DELETE',
-	'GET',
-	'OPTIONS',
-	'PATCH',
-	'POST',
-	'PUT',
-	'VIEW',
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+    'VIEW',
 )
 CORS_ALLOW_HEADERS = (
-	'authorization',
-	'content-type',
+    'authorization',
+    'content-type',
 )
+
+import datetime
+JWT_AUTH = {
+    # 过期时间7天
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
+
+}
+
+

@@ -1,5 +1,5 @@
 
-from rest_framework.response import  Response
+from rest_framework.response import Response
 
 
 class APIResponse(Response):
@@ -7,7 +7,6 @@ class APIResponse(Response):
         dic={
             'code':code,
             'msg':msg
-
              }
         if result:
             dic['result']=result
