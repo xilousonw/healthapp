@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 from healthapp.utils.models import BaseModel
+# from healthapp.apps.user.models import User
+from user.models import User
 
 
 class news(BaseModel):
@@ -60,14 +62,7 @@ class comment(BaseModel):
 
     content = models.CharField(verbose_name='评论内容', max_length=255)
     cmt_time = models.DateTimeField(auto_now_add=True, verbose_name='评论时间')
-    cmt_thumbup = models.IntegerField(verbose_name='评论点赞数')
+    cmt_thumbup = models.IntegerField(null=True,verbose_name='评论点赞数')
     # 自关联
     parent = models.ForeignKey(to='self', null=True,on_delete=models.CASCADE)  # 有些评论就是根评
 
-# {
-#     "username":"laoba",
-#     "usericon":"http://127.0.0.1:8000/media/icon/default.png",
-#     "content":"11111123232",
-#     "cmt_time":1231,
-#     "cmt_thumbup":109
-# }

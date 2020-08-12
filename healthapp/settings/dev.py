@@ -65,8 +65,6 @@ INSTALLED_APPS = [
     'accompany',
 
 
-
-
 ]
 
 MIDDLEWARE = [

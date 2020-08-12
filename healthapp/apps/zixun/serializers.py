@@ -22,13 +22,18 @@ class NewsDetailSerializer(serializers.ModelSerializer):
         }
 
 
+
 class CommentSerializer(serializers.ModelSerializer):
+    # user
     class Meta:
         model = models.comment
-        fields = ['username', 'content', 'cmt_time', 'cmt_thumbup']
+        fields = ['username', 'content', 'cmt_time',]
         extra_kwargs = {
             'id': {'read_only': True}
         }
+
+    def _get_usericon(self,attrs):
+        usericon = attrs.get('usericon')
 
 
     def _filter_bad_words(self,attrs):
@@ -36,7 +41,7 @@ class CommentSerializer(serializers.ModelSerializer):
         badword_list = ['sb','傻逼','弱智']
         for badword in badword_list:
             if badword in content:
-                content.replace('**', badword)
+                content.replace(badword,'**')
                 raise ValidationError('包含敏感词')
         return content
 

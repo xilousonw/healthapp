@@ -22,6 +22,7 @@ class NewsDetailView(GenericViewSet,RetrieveModelMixin):
     queryset = models.news_detail.objects.filter(is_delete=False,is_show=True)
     serializer_class = serializers.NewsDetailSerializer
 
+# from healthapp.apps.user.models import User
 
 class CommentView(GenericViewSet,CreateModelMixin):
     # queryset = models.comment.objects.filter(is_delete=False,is_show=True)
@@ -31,9 +32,9 @@ class CommentView(GenericViewSet,CreateModelMixin):
     # def post(self,request):
     #     return self.create(request)
 
-    # def create(self, request, *args, **kwargs):
-    #     response=super().create(request, *args, **kwargs)
-    #     return APIResponse(code=1,msg='评论成功')
+    def create(self, request, *args, **kwargs):
+        response=super().create(request, *args, **kwargs)
+        return APIResponse(code=1,msg='评论成功')
 
 
 
