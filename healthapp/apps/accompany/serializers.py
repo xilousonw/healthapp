@@ -14,7 +14,6 @@ class AccompanySerializer(serializers.ModelSerializer):
         }
 
 
-
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.appointment
@@ -54,14 +53,6 @@ class HostpitalSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     # 前端传什么数据过来{course:[1,2,3],total_amount:100,subject:xx商品,pay_type:1,}
     # user字段需要，但是不是传的，使用了jwt
-
-
-    # 需要把course:[1,2,3] 处理成 course:[obj1,obj2,obj3]
-
-    # 课时：[1,4,6,]===>课时：[obj1,obj4,obj6,]
-    # course=serializers.CharField()
-    appointment=serializers.PrimaryKeyRelatedField(queryset=models.appointment.objects.all(), write_only=True, many=True)
-
     class Meta:
         model = models.Order
         fields = ['total_amount','pay_type','appointment']
@@ -81,9 +72,11 @@ class OrderSerializer(serializers.ModelSerializer):
             raise ValidationError('价格不合法')
         return total_amount
 
+
     def _gen_out_trade_no(self):
         import uuid
         return str(uuid.uuid4()).replace('-','')
+
 
     def _get_user(self):
         # 需要request对象(需要视图通过context把reuqest对象传入。重写create方法)

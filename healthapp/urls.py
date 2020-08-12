@@ -25,6 +25,9 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('news/', include('zixun.urls')),
     path('accompany/',include('accompany.urls')),
+    path('disease/', include('disease.urls')),
+    path('symptom/', include('symptom.urls')),
+
 
     # media文件夹路径打开了
     re_path('media/(?P<path>.*)', serve, {'document_root': settings.MEDIA_ROOT})

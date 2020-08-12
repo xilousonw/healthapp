@@ -71,6 +71,8 @@ class hospital(BaseModel):
     level = models.IntegerField(choices=hospital_level,verbose_name='医院级别')
     address = models.CharField(max_length=128,verbose_name='医院具体地址')
 
+
+
     class Meta:
         db_table = "hospital"
         verbose_name = "医院"
