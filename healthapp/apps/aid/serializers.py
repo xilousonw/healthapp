@@ -14,7 +14,13 @@ class SymptonSerializer(serializers.ModelSerializer):
         fileds = ['id', 'name']
 
 
-class DrugDetailSerializer(serializers.ModelSerializer):
+class DrugListSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Drug
+        fields = ['name','drug_kind','drug_otc','drug_yibao']
+
+
+class DrugDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Drugdetail
         fields = "__all__"

@@ -1,11 +1,7 @@
 from django.urls import path, re_path, include
 from . import views
 
-from rest_framework.routers import SimpleRouter
 
-router = SimpleRouter()
-# router.register('firstaid', views.FirstaidView, 'firstaid')
-# router.register('firstaid/detail', views.FirstaidDetailView, 'firstaid/detail')
 urlpatterns = [
 
     # path('', include(router.urls)),

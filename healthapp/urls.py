@@ -27,6 +27,7 @@ urlpatterns = [
     path('accompany/',include('accompany.urls')),
     path('disease/', include('disease.urls')),
     path('symptom/', include('symptom.urls')),
+    path('aid/', include('aid.urls')),
 
 
     # media文件夹路径打开了

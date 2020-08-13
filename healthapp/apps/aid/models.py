@@ -8,14 +8,11 @@ from healthapp.utils.models import BaseModel
 class Aid(BaseModel):
     name = models.CharField(max_length=32,verbose_name='疾病类别')
 
-    # symptom = models.ForeignKey(to='Symptom',on_delete=models.CASCADE,verbose_name='症状')
-
 
 class Symptom(BaseModel):
     name = models.CharField(max_length=32,verbose_name='症状')
 
-    # aid = models.ForeignKey(to='Aid',on_delete=models.CASCADE,verbose_name='疾病类型')
-
+    aid = models.ForeignKey(to='Aid',on_delete=models.CASCADE,verbose_name='对应疾病类型')
 
 
 class Drug(BaseModel):
@@ -40,6 +37,10 @@ class Drug(BaseModel):
     drug_kind = models.SmallIntegerField(choices=kind, default=0, verbose_name="药品类别")
     drug_otc = models.SmallIntegerField(choices=otc, default=0, verbose_name="otc类别")
     drug_yibao = models.SmallIntegerField(choices=yibao, default=0, verbose_name="医保类别")
+
+    symptom = models.ForeignKey(to='Symptom', on_delete=models.DO_NOTHING, verbose_name='对应症状')
+
+    company = models.ForeignKey(to='Company', on_delete=models.DO_NOTHING, verbose_name='对应制药公司')
 
 
 class Drugdetail(BaseModel):
