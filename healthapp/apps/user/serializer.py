@@ -54,6 +54,12 @@ class UserSerilaizer(serializers.ModelSerializer):
         return token
 
 
+class UserInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        modle = models.UseInfo
+        fields = ['id','sex','birthday','location','wechat','weibo','qq','level','coin']
+
+
 class CodeUserSerilaizer(serializers.ModelSerializer):
     code=serializers.CharField()
     class Meta:

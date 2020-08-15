@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path,re_path, include
 from django.views.static import serve
 from django.conf import settings
+from rest_framework.documentation import include_docs_urls
+
 
 
 urlpatterns = [
@@ -28,6 +30,7 @@ urlpatterns = [
     path('disease/', include('disease.urls')),
     path('symptom/', include('symptom.urls')),
     path('aid/', include('aid.urls')),
+    # path('docs/', include_docs_urls(title='站点页面标题')),
 
 
     # media文件夹路径打开了

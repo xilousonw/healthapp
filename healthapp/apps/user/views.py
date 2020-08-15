@@ -2,11 +2,16 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework.viewsets import ViewSet,GenericViewSet
-from rest_framework.mixins import CreateModelMixin
+from rest_framework.mixins import CreateModelMixin,RetrieveModelMixin
 from . import serializer
 from healthapp.utils.response import APIResponse
 from rest_framework.decorators import action
 from . import models
+
+
+class UserInfoView(GenericViewSet,RetrieveModelMixin):
+    queryset = models.UseInfo.objects.all()
+    serializer_class = serializer.UserInfoSerializer
 
 
 class LoginView(ViewSet):

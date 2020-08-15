@@ -21,7 +21,6 @@ class AppointmentView(GenericViewSet,CreateModelMixin):
     serializer_class = serializers.AppointmentSerializer
 
 
-
 class PatientView(GenericViewSet,ListModelMixin):
     queryset = models.patient.objects.filter(is_delete=False,is_show=True)
     serializer_class = serializers.PatientSerializer

@@ -72,7 +72,6 @@ class hospital(BaseModel):
     address = models.CharField(max_length=128,verbose_name='医院具体地址')
 
 
-
     class Meta:
         db_table = "hospital"
         verbose_name = "医院"
@@ -81,6 +80,10 @@ class hospital(BaseModel):
     def __str__(self):
         return "%s" % self.name
 
+
+    @property
+    def level_name(self):
+        return self.get_level_display()
 
 class Order(models.Model):
     status_choices = (

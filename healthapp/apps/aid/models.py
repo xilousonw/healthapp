@@ -12,7 +12,7 @@ class Aid(BaseModel):
 class Symptom(BaseModel):
     name = models.CharField(max_length=32,verbose_name='症状')
 
-    aid = models.ForeignKey(to='Aid',on_delete=models.CASCADE,verbose_name='对应疾病类型')
+    aid = models.ForeignKey(to='Aid',null=True,on_delete=models.CASCADE,verbose_name='对应疾病类型')
 
 
 class Drug(BaseModel):
@@ -38,9 +38,26 @@ class Drug(BaseModel):
     drug_otc = models.SmallIntegerField(choices=otc, default=0, verbose_name="otc类别")
     drug_yibao = models.SmallIntegerField(choices=yibao, default=0, verbose_name="医保类别")
 
-    symptom = models.ForeignKey(to='Symptom', on_delete=models.DO_NOTHING, verbose_name='对应症状')
+    symptom = models.ForeignKey(to='Symptom', null=True, on_delete=models.DO_NOTHING, verbose_name='对应症状')
 
-    company = models.ForeignKey(to='Company', on_delete=models.DO_NOTHING, verbose_name='对应制药公司')
+    company = models.ForeignKey(to='Company', null=True, on_delete=models.DO_NOTHING, verbose_name='对应制药公司')
+
+    class Meta:
+        db_table = "drug"
+        verbose_name = "药品简介"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return "%s" % self.name
+
+    def drug_kind_name(self):
+        return self.get_drug_kind_display()
+
+    def drug_otc_name(self):
+        return self.get_drug_otc_display()
+
+    def drug_yibao_name(self):
+        return self.get_drug_yibao_display()
 
 
 class Drugdetail(BaseModel):
@@ -65,6 +82,7 @@ class Drugdetail(BaseModel):
     commodity_name =models.CharField(max_length=32,verbose_name='药品俗名')
     spell_name =models.CharField(max_length=32,verbose_name='药品拼音')
     ingredient = models.IntegerField(choices=ingredient_label,verbose_name='药品类型')
+    price =models.CharField(max_length=32,null=True,verbose_name='价格')
     prescription = models.IntegerField(choices=prescription_label,verbose_name='处方级别')
     insurance = models.IntegerField(choices=insurance_label,verbose_name='医保类型')
     disease = models.CharField(max_length=128,verbose_name='适用疾病')
@@ -92,6 +110,26 @@ class Drugdetail(BaseModel):
     production_enterprises = models.CharField(max_length=32,verbose_name='制药企业')
     # avg_score = models
     picture = models.ImageField(upload_to="drug", max_length=255, verbose_name="封面图片", default='drug/default.png')
+
+    class Meta:
+        db_table = "drugdetail"
+        verbose_name = "药品详情"
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return "%s" % self.general_name
+
+    def ingredient_name(self):
+        return self.get_ingredient_display()
+
+    def prescription_name(self):
+        return self.get_prescription_display()
+
+    def insurance_name(self):
+        return self.get_insurance_display()
+
+
+
 
 class Company(BaseModel):
     name = models.CharField(max_length=32)

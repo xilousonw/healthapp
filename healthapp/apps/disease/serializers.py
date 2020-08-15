@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 class DiseaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.disease
-        fields = ['id','c_name']
+        fields = ['id','name']
         # extra_kwargs = {
         #     'id':{'read_only':True}
         # }
@@ -16,7 +16,7 @@ class DiseaseSerializer(serializers.ModelSerializer):
 class DiseaseDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.disease
-        fields = ['id','c_name','e_name','makecall','do_steps','go_doctor']
+        fields = '__all__'
         # extra_kwargs = {
         #     'id':{'read_only':True}
         # }

@@ -44,7 +44,7 @@ class PatientAddSerializer(serializers.ModelSerializer):
 class HostpitalSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.hospital
-        field = ['id','name', 'district', 'level', 'address']
+        fields = ['id','name', 'district', 'level','level_name', 'address']
         extra_kwargs = {
             'id': {'read_only': True},
         }

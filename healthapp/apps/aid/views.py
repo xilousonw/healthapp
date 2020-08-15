@@ -26,14 +26,15 @@ class SymptomView(GenericViewSet,ListModelMixin):
     queryset = models.Symptom.objects.filter(is_delete=False, is_show=True)
     serializer_class = serializers.SymptonSerializer
 
+
 from . import filters
 class DrugView(GenericViewSet,ListModelMixin):
     queryset = models.Drug.objects.filter(is_delete=False, is_show=True)
     serializer_class = serializers.DrugListSerializer
 
     #通过对'drug_kind','drug_otc','drug_yibao'字段进行过滤来筛选药品
-    filter_backends = [DjangoFilterBackend, filters.DrugFilterSet]
-    filter_fields = ['drug_kind','drug_otc','drug_yibao']
+    # filter_backends = [DjangoFilterBackend, filters.DrugFilterSet]
+    # filter_fields = ['drug_kind','drug_otc','drug_yibao']
 
 
 class DrugDetailView(GenericViewSet,RetrieveModelMixin):
